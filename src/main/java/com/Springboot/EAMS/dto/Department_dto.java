@@ -27,13 +27,15 @@ public class Department_dto {
     String department_name;
 
     @JsonProperty("to_id")
-    Long reporto_department_id;
+    Long reportsto_department_id;
 
     @JsonProperty("manager_id")
     Long manager_id;
 
     @JsonProperty("location")
     String location;
+
+
 
 
     private List<Employee> employees;

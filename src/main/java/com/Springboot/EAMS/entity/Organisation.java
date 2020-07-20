@@ -1,4 +1,6 @@
 package com.Springboot.EAMS.entity;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Setter
@@ -30,4 +33,9 @@ public class Organisation {
 
     @Column(name = "location")
     private String location;
+
+    @OneToMany(mappedBy = "reportsto_id",fetch = FetchType.EAGER)
+    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    List<Department>departments;
+
 }

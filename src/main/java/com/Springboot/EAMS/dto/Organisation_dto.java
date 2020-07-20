@@ -33,8 +33,7 @@ public class Organisation_dto {
     @JsonProperty("location")
     String location;
 
-    @OneToMany(mappedBy = "department_id",fetch = FetchType.EAGER)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+
 
     private List<Department> departments;
 

@@ -1,5 +1,9 @@
 package com.Springboot.EAMS.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,13 +42,17 @@ public class Employee {
     @Column(name="age")
     private  int age;
 
+    @Column(name ="department_id")
+    private  long department_id;
+
     //@JsonIgnore
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name="department_id")
-    //@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
     //@JsonBackReference
-    private Department department;
+    @JsonIgnoreProperties
+    private Department department;*/
 
 
 

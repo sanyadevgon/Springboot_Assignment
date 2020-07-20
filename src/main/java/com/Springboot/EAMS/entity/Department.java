@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,8 +28,8 @@ public class Department implements Serializable{
     @Column(name="department_name")
     private String department_name;
 
-    @Column(name="reportingto_department_id")
-    private long reporto_department_id;
+    @Column(name="reportsto_id")
+    private long reportsto_id;
 
     @Column(name="manager_id")
     private long manager_id;
@@ -40,19 +41,12 @@ public class Department implements Serializable{
     @JoinColumn(name = "mange_mploy_id", nullable = false)
     private Employee manger;*/
 
-    @ManyToOne
-    @JoinColumn(name="organisation_id")
-    //@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-    //@JsonBackReference
-    private Organisation organisation;
-
-    @OneToMany(mappedBy = "department",fetch = FetchType.EAGER)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-    private List<Employee> employees;
+    @OneToMany(mappedBy = "department_id", cascade=CascadeType.ALL)
+    private List<Employee> employees=new ArrayList<>();
 
     public Department(String department_name, long reportingto_department_id, long manager_id, String location){
         this.department_name=department_name;
-        this.reporto_department_id=reportingto_department_id;
+        this.reportsto_id=reportingto_department_id;
         this.manager_id=manager_id;
         this.location=location;
 
