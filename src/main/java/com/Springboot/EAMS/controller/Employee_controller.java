@@ -1,9 +1,9 @@
-package com.Springboot.EAMS.Controller;
+package com.Springboot.EAMS.controller;
 
 
-import com.Springboot.EAMS.Entity.Employee;
-import com.Springboot.EAMS.Service.EmployeeService;
-import com.Springboot.EAMS.DTO.Employee_dto;
+import com.Springboot.EAMS.entity.Employee;
+import com.Springboot.EAMS.service.EmployeeService;
+import com.Springboot.EAMS.dto.Employee_dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.*;
             @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
             public Employee postEmployeeDetails(
                     @RequestBody Employee_dto employee_dto) {
+                employee_dto.builder().message(employee_dto.getMessage()).build();
                 return service.save(employee_dto);
+
             }
 
             @GetMapping(value = "/{id}")

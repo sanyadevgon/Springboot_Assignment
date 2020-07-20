@@ -1,15 +1,11 @@
-package com.Springboot.EAMS.Entity;
+package com.Springboot.EAMS.entity;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.kafka.common.protocol.types.Field;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 //import javax.validation.constraints.Size;
 
 @Entity
@@ -45,13 +41,12 @@ public class Employee {
     //@JsonIgnore
 
     @ManyToOne
-    //@JoinColumn(name="department_id")
+    @JoinColumn(name="department_id")
     //@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
     //@JsonBackReference
     private Department department;
 
-    @Column(name="department_id")
-    private  int department_id;
+
 
 /*
     @Temporal(TemporalType.DATE)

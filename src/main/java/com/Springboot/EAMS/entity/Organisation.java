@@ -1,4 +1,4 @@
-package com.Springboot.EAMS.Entity;
+package com.Springboot.EAMS.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Setter

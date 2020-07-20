@@ -1,7 +1,6 @@
-package com.Springboot.EAMS.Repo;
+package com.Springboot.EAMS.repo;
 
-import com.Springboot.EAMS.Entity.Department;
-import com.Springboot.EAMS.Entity.Organisation;
+import com.Springboot.EAMS.entity.Organisation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

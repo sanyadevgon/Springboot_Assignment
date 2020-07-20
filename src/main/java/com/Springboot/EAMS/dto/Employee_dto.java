@@ -1,16 +1,11 @@
-package com.Springboot.EAMS.DTO;
+package com.Springboot.EAMS.dto;
 
-import com.Springboot.EAMS.Entity.Department;
+import com.Springboot.EAMS.entity.Department;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 @Data
@@ -48,6 +43,8 @@ public class Employee_dto {
 
         @JsonProperty("department_id")
         private  int department_id;
+
+        public String message;
 
 
 

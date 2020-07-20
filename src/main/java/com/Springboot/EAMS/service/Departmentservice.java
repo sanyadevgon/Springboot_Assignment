@@ -1,12 +1,11 @@
-package com.Springboot.EAMS.Service;
+package com.Springboot.EAMS.service;
 
-import com.Springboot.EAMS.DTO.Department_dto;
-import com.Springboot.EAMS.Entity.Department;
-import com.Springboot.EAMS.Repo.DepartmentRepo;
+import com.Springboot.EAMS.dto.Department_dto;
+import com.Springboot.EAMS.entity.Department;
+import com.Springboot.EAMS.repo.DepartmentRepo;
 import com.Springboot.EAMS.exception.EamsException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

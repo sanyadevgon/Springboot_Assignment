@@ -1,6 +1,5 @@
-package com.Springboot.EAMS.DTO;
-import com.Springboot.EAMS.Entity.Department;
-import com.Springboot.EAMS.Entity.Employee;
+package com.Springboot.EAMS.dto;
+import com.Springboot.EAMS.entity.Department;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.List;
 
 @Data

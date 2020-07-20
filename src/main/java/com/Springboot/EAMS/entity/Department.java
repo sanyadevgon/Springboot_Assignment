@@ -1,7 +1,6 @@
-package com.Springboot.EAMS.Entity;
+package com.Springboot.EAMS.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,9 +40,14 @@ public class Department implements Serializable{
     @JoinColumn(name = "mange_mploy_id", nullable = false)
     private Employee manger;*/
 
-    @OneToMany(mappedBy = "department_id",fetch = FetchType.EAGER)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    @ManyToOne
+    @JoinColumn(name="organisation_id")
+    //@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+    //@JsonBackReference
+    private Organisation organisation;
 
+    @OneToMany(mappedBy = "department",fetch = FetchType.EAGER)
+    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
     private List<Employee> employees;
 
     public Department(String department_name, long reportingto_department_id, long manager_id, String location){

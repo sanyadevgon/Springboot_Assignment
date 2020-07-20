@@ -1,8 +1,8 @@
-package com.Springboot.EAMS.Controller;
+package com.Springboot.EAMS.controller;
 
-import com.Springboot.EAMS.DTO.Department_dto;
-import com.Springboot.EAMS.Entity.Department;
-import com.Springboot.EAMS.Service.Departmentservice;
+import com.Springboot.EAMS.dto.Department_dto;
+import com.Springboot.EAMS.entity.Department;
+import com.Springboot.EAMS.service.Departmentservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

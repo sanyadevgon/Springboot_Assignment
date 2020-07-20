@@ -1,6 +1,6 @@
-package com.Springboot.EAMS.DTO;
+package com.Springboot.EAMS.dto;
 
-import com.Springboot.EAMS.Entity.Employee;
+import com.Springboot.EAMS.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,6 +34,7 @@ public class Department_dto {
 
     @JsonProperty("location")
     String location;
+
 
     private List<Employee> employees;
 

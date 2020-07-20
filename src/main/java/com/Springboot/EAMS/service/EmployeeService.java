@@ -1,9 +1,8 @@
-package com.Springboot.EAMS.Service;
+package com.Springboot.EAMS.service;
 
-import com.Springboot.EAMS.DTO.Employee_dto;
-import com.Springboot.EAMS.EamsApplication;
-import com.Springboot.EAMS.Entity.Employee;
-import com.Springboot.EAMS.Repo.EmployeeRepo;
+import com.Springboot.EAMS.dto.Employee_dto;
+import com.Springboot.EAMS.entity.Employee;
+import com.Springboot.EAMS.repo.EmployeeRepo;
 import com.Springboot.EAMS.exception.EamsException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

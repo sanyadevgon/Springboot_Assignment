@@ -1,9 +1,7 @@
-package com.Springboot.EAMS.Service;
+package com.Springboot.EAMS.service;
 
-import com.Springboot.EAMS.DTO.Department_dto;
-import com.Springboot.EAMS.DTO.Employee_dto;
-import com.Springboot.EAMS.Entity.Department;
-import org.junit.jupiter.api.Test;
+import com.Springboot.EAMS.dto.Department_dto;
+import com.Springboot.EAMS.dto.Employee_dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
