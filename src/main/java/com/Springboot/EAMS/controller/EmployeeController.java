@@ -3,7 +3,7 @@ package com.Springboot.EAMS.controller;
 
 import com.Springboot.EAMS.entity.Employee;
 import com.Springboot.EAMS.service.EmployeeService;
-import com.Springboot.EAMS.dto.Employee_dto;
+import com.Springboot.EAMS.dto.EmployeeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/employee")
-public class Employee_controller {
+public class EmployeeController {
 
     @Autowired
     EmployeeService service;
 
     @Autowired
-    Employee_dto employee_dto; //Employeedto
+    EmployeeDTO employee_dto; //Employeedto
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Employee postEmployeeDetails(
-            @RequestBody Employee_dto employee_dto) {
+            @RequestBody EmployeeDTO employee_dto) {
         employee_dto.builder().message(employee_dto.getMessage()).build();
         return service.save(employee_dto);
 
@@ -39,7 +39,7 @@ public class Employee_controller {
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@RequestBody Employee_dto employee_dto, @PathVariable long id) {
+    public Employee updateEmployee(@RequestBody EmployeeDTO employee_dto, @PathVariable long id) {
         return service.update(employee_dto, id);
 
     }

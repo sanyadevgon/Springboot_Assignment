@@ -1,7 +1,7 @@
 package com.Springboot.EAMS.service;
 
-import com.Springboot.EAMS.dto.Department_dto;
-import com.Springboot.EAMS.dto.Employee_dto;
+import com.Springboot.EAMS.dto.DepartmentDTO;
+import com.Springboot.EAMS.dto.EmployeeDTO;
 import com.Springboot.EAMS.entity.Department;
 import com.Springboot.EAMS.entity.Employee;
 import com.Springboot.EAMS.repo.DepartmentRepo;
@@ -16,9 +16,9 @@ import java.util.Optional;
 class employeeServiceTest {
 
     @Autowired
-    Employee_dto employee;
+    EmployeeDTO employee;
     @Autowired
-    Department_dto department;
+    DepartmentDTO department;
     @Autowired
     EmployeeService ems;
     /*@Test

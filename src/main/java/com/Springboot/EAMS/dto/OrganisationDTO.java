@@ -19,7 +19,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
-public class Organisation_dto {
+public class OrganisationDTO {
 
     @JsonProperty("office_id")
     Long id;

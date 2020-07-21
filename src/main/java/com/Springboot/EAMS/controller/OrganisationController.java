@@ -1,7 +1,7 @@
 package com.Springboot.EAMS.controller;
 
-import com.Springboot.EAMS.dto.Department_dto;
-import com.Springboot.EAMS.dto.Organisation_dto;
+import com.Springboot.EAMS.dto.DepartmentDTO;
+import com.Springboot.EAMS.dto.OrganisationDTO;
 import com.Springboot.EAMS.entity.Organisation;
 import com.Springboot.EAMS.service.OrganisationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping(value="/organisation")
-public class Organisation_controller {
+public class OrganisationController {
     @Autowired
     OrganisationService service;
 
     @Autowired
-    Department_dto dto;
+    DepartmentDTO dto;
 
     @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
     public Organisation postOrganisationDetails(
-            @RequestBody Organisation_dto dto) {
+            @RequestBody OrganisationDTO dto) {
         return service.save(dto);
     }
 
@@ -33,7 +33,7 @@ public class Organisation_controller {
         service.delete(id);
     }
     @PutMapping("/{id}")
-    public Object updateOrganisation(@RequestBody Organisation_dto dto, @PathVariable long id) {
+    public Object updateOrganisation(@RequestBody OrganisationDTO dto, @PathVariable long id) {
         return service.update(dto, id);
 
     }

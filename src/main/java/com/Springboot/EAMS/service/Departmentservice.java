@@ -1,6 +1,6 @@
 package com.Springboot.EAMS.service;
 
-import com.Springboot.EAMS.dto.Department_dto;
+import com.Springboot.EAMS.dto.DepartmentDTO;
 import com.Springboot.EAMS.entity.Department;
 import com.Springboot.EAMS.repo.DepartmentRepo;
 import com.Springboot.EAMS.exception.EamsException;
@@ -27,7 +27,7 @@ public class Departmentservice {
    }*/
 
     //create
-    public Department save(Department_dto dto){
+    public Department save(DepartmentDTO dto){
 
         return  repo.save(modelMapper.map(dto,Department.class));
     }
@@ -44,7 +44,7 @@ public class Departmentservice {
         repo.deleteById(id);
     }
     //update
-    public Department update(Department_dto dto, long id){
+    public Department update(DepartmentDTO dto, long id){
         Optional<Department> employee = repo.findById(id);
 
         if (!employee.isPresent())

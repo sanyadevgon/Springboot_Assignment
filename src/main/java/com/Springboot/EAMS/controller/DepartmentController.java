@@ -1,6 +1,6 @@
 package com.Springboot.EAMS.controller;
 
-import com.Springboot.EAMS.dto.Department_dto;
+import com.Springboot.EAMS.dto.DepartmentDTO;
 import com.Springboot.EAMS.entity.Department;
 import com.Springboot.EAMS.service.Departmentservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping(value="/department")
-public class Department_controller {
+public class DepartmentController {
     @Autowired
     Departmentservice service;
 
     @Autowired
-    Department_dto dto;
+    DepartmentDTO dto;
 
     @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
     public Department postEmployeeDetails(
-            @RequestBody Department_dto dto) {
+            @RequestBody DepartmentDTO dto) {
         return service.save(dto);
     }
 
@@ -32,7 +32,7 @@ public class Department_controller {
         service.delete(id);
     }
     @PutMapping("/{id}")
-    public Object updateDepartment(@RequestBody Department_dto dto, @PathVariable long id) {
+    public Object updateDepartment(@RequestBody DepartmentDTO dto, @PathVariable long id) {
         return service.update(dto, id);
 
     }

@@ -1,6 +1,6 @@
 package com.Springboot.EAMS.service;
 
-import com.Springboot.EAMS.dto.Employee_dto;
+import com.Springboot.EAMS.dto.EmployeeDTO;
 import com.Springboot.EAMS.entity.Employee;
 import com.Springboot.EAMS.repo.EmployeeRepo;
 import com.Springboot.EAMS.exception.EamsException;
@@ -26,7 +26,7 @@ public class EmployeeService {
 
 
     @Autowired
-    Employee_dto employee_dto;
+    EmployeeDTO employee_dto;
 
     @Bean
     public ModelMapper modelMapper(){
@@ -45,7 +45,7 @@ public class EmployeeService {
    }*/
 
     //create
-    public Employee save(Employee_dto employee_dto){
+    public Employee save(EmployeeDTO employee_dto){
 
         //logger.info("The Request Object is : %s",employee_dto.toString());
         return  repo.save(modelMapper.map(employee_dto,Employee.class));
@@ -63,7 +63,7 @@ public class EmployeeService {
         repo.deleteById(id);
     }
     //update
-    public Employee update(Employee_dto employee_dto, long id){
+    public Employee update(EmployeeDTO employee_dto, long id){
         Optional<Employee> employee = repo.findById(id);
 
         if (!employee.isPresent())

@@ -1,7 +1,7 @@
 package com.Springboot.EAMS.service;
 
 
-import com.Springboot.EAMS.dto.Organisation_dto;
+import com.Springboot.EAMS.dto.OrganisationDTO;
 import com.Springboot.EAMS.entity.Organisation;
 import com.Springboot.EAMS.repo.OrganisationRepo;
 import com.Springboot.EAMS.exception.EamsException;
@@ -19,7 +19,7 @@ public class OrganisationService {
 
 
     @Autowired
-    Organisation_dto dto;
+    OrganisationDTO dto;
 
     private ModelMapper modelMapper= new ModelMapper();
 
@@ -32,7 +32,7 @@ public class OrganisationService {
    }*/
 
     //create
-    public Organisation save(Organisation_dto dto){
+    public Organisation save(OrganisationDTO dto){
 
         return  repo.save(modelMapper.map(dto,Organisation.class));
     }
@@ -50,7 +50,7 @@ public class OrganisationService {
     }
 
     //update
-    public Organisation update(Organisation_dto dto, long id){
+    public Organisation update(OrganisationDTO dto, long id){
         Optional<Organisation> organisation = repo.findById(id);
 
         if (!organisation.isPresent())

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
-public class Employee_dto {
+public class EmployeeDTO {
 
         @JsonProperty("id")
         Long id;
