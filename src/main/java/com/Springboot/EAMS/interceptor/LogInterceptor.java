@@ -23,7 +23,7 @@ public class LogInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         if (DispatcherType.REQUEST.name().equals(request.getDispatcherType().name()) && request.getMethod().equals(HttpMethod.GET.name())) {
-            loggingService.logRequest(request, null);
+            loggingService.logRequest(request,response);
         }
 
         return true;

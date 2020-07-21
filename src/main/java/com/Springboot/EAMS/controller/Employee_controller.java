@@ -10,40 +10,48 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-        @RequestMapping(value = "/employee")
-        public class Employee_controller {
+@RequestMapping(value = "/employee")
+public class Employee_controller {
 
-            @Autowired
-            EmployeeService service;
+    @Autowired
+    EmployeeService service;
 
-            @Autowired
-            Employee_dto employee_dto;
+    @Autowired
+    Employee_dto employee_dto; //Employeedto
 
-            @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
-            public Employee postEmployeeDetails(
-                    @RequestBody Employee_dto employee_dto) {
-                employee_dto.builder().message(employee_dto.getMessage()).build();
-                return service.save(employee_dto);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Employee postEmployeeDetails(
+            @RequestBody Employee_dto employee_dto) {
+        employee_dto.builder().message(employee_dto.getMessage()).build();
+        return service.save(employee_dto);
 
-            }
+    }
 
-            @GetMapping(value = "/{id}")
-            public Employee retrieveEmployee(@PathVariable Long id) {
-                return service.get(id);
+    @GetMapping(value = "/{id}")
+    public Employee retrieveEmployee(@PathVariable Long id) {
+        return service.get(id);
 
-            }
-            @DeleteMapping("/{id}")
-            public void deleteEmployee(@PathVariable long id) {
-                service.delete(id);
-            }
-            @PutMapping("/{id}")
-            public Employee updateEmployee(@RequestBody Employee_dto employee_dto, @PathVariable long id) {
-               return service.update(employee_dto, id);
+    }
 
-            }
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable long id) {
+        service.delete(id);
+    }
 
-            //@PostMapping(value="/update",)
-        }
+    @PutMapping("/{id}")
+    public Employee updateEmployee(@RequestBody Employee_dto employee_dto, @PathVariable long id) {
+        return service.update(employee_dto, id);
+
+    }
+
+    @PutMapping("/increment/{value}")
+    public void updateallEmployeesalary( @PathVariable long value) {
+         service.updateallsalary(value);
+    }
+
+
+    //@PostMapping(value="/update",)
+}
 
 
 

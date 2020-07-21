@@ -5,9 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @SpringBootApplication
 @EnableJpaRepositories
+@EnableWebSecurity
 public class EamsApplication {
 
 	//private static final Logger logger = LoggerFactory.getLogger(EamsApplication.class);

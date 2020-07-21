@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+
+
 @Service
 public class EmployeeService {
 
@@ -46,7 +48,7 @@ public class EmployeeService {
     public Employee save(Employee_dto employee_dto){
 
         //logger.info("The Request Object is : %s",employee_dto.toString());
-       return  repo.save(modelMapper.map(employee_dto,Employee.class));
+        return  repo.save(modelMapper.map(employee_dto,Employee.class));
     }
     //retrieve
     public Employee get(long id){
@@ -64,14 +66,21 @@ public class EmployeeService {
     public Employee update(Employee_dto employee_dto, long id){
         Optional<Employee> employee = repo.findById(id);
 
-       if (!employee.isPresent())
-           throw new EamsException("NOT FOUND id-" + id);
+        if (!employee.isPresent())
+            throw new EamsException("NOT FOUND id-" + id);
 
 
         return repo.save(modelMapper.map(employee_dto,Employee.class));
 
     }
+    public void updateallsalary(long increment){
+        if (increment<=0)
+                return;
 
+        repo.updatesalary(increment);
+
+
+    }
 
 
 }

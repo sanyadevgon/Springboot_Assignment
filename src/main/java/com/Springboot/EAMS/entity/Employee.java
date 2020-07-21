@@ -43,8 +43,10 @@ public class Employee {
     private  int age;
 
     @Column(name ="department_id")
-    private  long department_id;
+    private int department_id;
 
+    @Column(name ="password")
+    private String password;
     //@JsonIgnore
 
     /*@ManyToOne
