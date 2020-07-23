@@ -2,6 +2,7 @@ package com.Springboot.EAMS;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableWebSecurity
+@EnableCaching
 public class EamsApplication {
 
 	//private static final Logger logger = LoggerFactory.getLogger(EamsApplication.class);

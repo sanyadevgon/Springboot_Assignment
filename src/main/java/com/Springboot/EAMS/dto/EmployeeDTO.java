@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class EmployeeDTO {
 
         @JsonProperty("id")
-        Long id;
+        long id;
 
         @JsonProperty("firstname")
         private String firstname;

@@ -16,7 +16,6 @@ import javax.persistence.*;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Employee {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -56,6 +55,9 @@ public class Employee {
     @JsonIgnoreProperties
     private Department department;*/
 
+    public  Employee(){
+
+    }
 
 
 /*
@@ -65,7 +67,6 @@ public class Employee {
 */
 
     //Date of joining auto generate
-
 
 }
 
