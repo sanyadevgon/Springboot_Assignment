@@ -28,7 +28,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
                 .csrf().disable()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
-                .httpBasic();}
- 
+                .httpBasic();
+    }
 
-}
+    }

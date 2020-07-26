@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(value = EamsException.class)
+    @ExceptionHandler(value = GlobalEamsException.class)
 
-    public ResponseEntity<CustomErrorResponse> handleGenericNotFoundException(EamsException e) {
+    public ResponseEntity<CustomErrorResponse> handleGenericNotFoundException(GlobalEamsException e) {
 
         CustomErrorResponse error = new CustomErrorResponse("NOT_FOUND_ERROR", e.getMessage());
 
@@ -23,4 +23,6 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 
     }
+
+
 }

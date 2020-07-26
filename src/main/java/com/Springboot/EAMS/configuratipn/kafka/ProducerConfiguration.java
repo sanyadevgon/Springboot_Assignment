@@ -2,16 +2,11 @@ package com.Springboot.EAMS.configuratipn.kafka;
 
 
 
-import com.Springboot.EAMS.entity.Employee;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
+import com.Springboot.EAMS.model.dto.EmployeeDTO;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
@@ -20,11 +15,10 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
-@EnableKafka
 @Configuration
 public class ProducerConfiguration {
     @Bean
-    public ProducerFactory<String, Employee> producerFactory(){
+    public ProducerFactory<String, EmployeeDTO> producerFactory(){
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -34,7 +28,7 @@ public class ProducerConfiguration {
     }
     // required by springboot to inject into kafka class
     @Bean
-    public KafkaTemplate<String, Employee> kafkaTemplate(){
+    public KafkaTemplate<String, EmployeeDTO> kafkaTemplate(){
        return  new KafkaTemplate<>(producerFactory());
     }
 }

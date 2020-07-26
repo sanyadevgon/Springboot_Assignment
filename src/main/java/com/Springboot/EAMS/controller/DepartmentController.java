@@ -1,7 +1,7 @@
 package com.Springboot.EAMS.controller;
 
 import com.Springboot.EAMS.dto.DepartmentDTO;
-import com.Springboot.EAMS.entity.Department;
+import com.Springboot.EAMS.model.entity.Department;
 import com.Springboot.EAMS.service.Departmentservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -31,10 +31,16 @@ public class DepartmentController {
     public void deletedepartment(@PathVariable long id) {
         service.delete(id);
     }
+
     @PutMapping("/{id}")
     public Object updateDepartment(@RequestBody DepartmentDTO dto, @PathVariable long id) {
         return service.update(dto, id);
 
+    }
+
+    @GetMapping("/managerdetails/{id}")
+    public Object managerdetails(@PathVariable long id){
+        return service.managerDetails(id);
     }
 
 }

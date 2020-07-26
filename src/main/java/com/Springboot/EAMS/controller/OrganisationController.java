@@ -1,8 +1,7 @@
 package com.Springboot.EAMS.controller;
 
-import com.Springboot.EAMS.dto.DepartmentDTO;
-import com.Springboot.EAMS.dto.OrganisationDTO;
-import com.Springboot.EAMS.entity.Organisation;
+import com.Springboot.EAMS.model.entity.Organisation;
+import com.Springboot.EAMS.model.dto.OrganisationDTO;
 import com.Springboot.EAMS.service.OrganisationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,7 +14,7 @@ public class OrganisationController {
     OrganisationService service;
 
     @Autowired
-    DepartmentDTO dto;
+    OrganisationDTO dto;
 
     @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
     public Organisation postOrganisationDetails(
@@ -32,6 +31,7 @@ public class OrganisationController {
     public void deletedorganisation(@PathVariable long id) {
         service.delete(id);
     }
+
     @PutMapping("/{id}")
     public Object updateOrganisation(@RequestBody OrganisationDTO dto, @PathVariable long id) {
         return service.update(dto, id);

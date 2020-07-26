@@ -1,5 +1,6 @@
-package com.Springboot.EAMS.dto;
-import com.Springboot.EAMS.entity.Department;
+package com.Springboot.EAMS.model.dto;
+
+import com.Springboot.EAMS.model.entity.Department;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -8,8 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
@@ -21,13 +20,13 @@ import java.util.List;
 @Component
 public class OrganisationDTO {
 
-    @JsonProperty("office_id")
+    @JsonProperty("officeId")
     Long id;
 
-    @JsonProperty("office_name")
+    @JsonProperty("officeName")
     String name;
 
-    @JsonProperty("manager_id")
+    @JsonProperty("headId")
     Long manager_id;
 
     @JsonProperty("location")
@@ -38,3 +37,4 @@ public class OrganisationDTO {
     private List<Department> departments;
 
 }
+

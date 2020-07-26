@@ -1,4 +1,4 @@
-package com.Springboot.EAMS.entity;
+package com.Springboot.EAMS.model.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,14 +19,14 @@ import java.util.List;
 public class Organisation {
     @Id
     @GeneratedValue
-    @Column(name = "headoffice_id")
+    @Column(name = "officeId")
     private long id;
 
-    @Column(name = "headoffice_name")
+    @Column(name = "officeName")
     private String name;
 
-    @Column(name = "manager_id")
-    private long manager_id;
+    @Column(name = "headId")
+    private long headId;
 
     @Column(name = "location")
     private String location;

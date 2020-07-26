@@ -1,7 +1,5 @@
-package com.Springboot.EAMS.entity;
+package com.Springboot.EAMS.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +20,7 @@ import java.util.List;
 public class Department implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="department_id")
+    @Column(name="departmentId")
     private long id;
 
     @Column(name="department_name")
@@ -41,7 +39,9 @@ public class Department implements Serializable{
     @JoinColumn(name = "mange_mploy_id", nullable = false)
     private Employee manger;*/
 
-    @OneToMany(mappedBy = "department_id", cascade=CascadeType.ALL)
+    //department enum ka use
+
+    @OneToMany(mappedBy = "departmentId", cascade=CascadeType.ALL)
     private List<Employee> employees=new ArrayList<>();
 
     public Department(String department_name, long reportingto_department_id, long manager_id, String location){

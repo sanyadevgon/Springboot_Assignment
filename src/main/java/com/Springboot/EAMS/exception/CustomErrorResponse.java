@@ -1,8 +1,8 @@
 package com.Springboot.EAMS.exception;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 
 public class CustomErrorResponse {
 
@@ -17,7 +17,6 @@ public class CustomErrorResponse {
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;
 	}
-
 	public String getErrorCode() {
 		return errorCode;
 	}
@@ -49,6 +48,9 @@ public class CustomErrorResponse {
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
+
+
+
 
 
 }
