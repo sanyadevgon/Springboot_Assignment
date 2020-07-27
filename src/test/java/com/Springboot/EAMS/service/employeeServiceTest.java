@@ -5,7 +5,6 @@ import com.Springboot.EAMS.model.entity.Employee;
 import com.Springboot.EAMS.repo.DepartmentRepo;
 import com.Springboot.EAMS.repo.EmployeeDetailsRepo;
 import com.Springboot.EAMS.repo.EmployeeRepo;
-import com.Springboot.EAMS.repo.testint;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +19,7 @@ class employeeServiceTest {
     DepartmentDTO department;
     @Autowired
     EmployeeService ems;
+
     /*@Test
     void save() {
         employee.setId(11L);
@@ -44,8 +44,6 @@ class employeeServiceTest {
     @Autowired
     EmployeeDetailsRepo employeeDetailsRepo;
 
-    @Autowired
-    testint tst;
 
     @Test
     void contextLoads() {
@@ -65,6 +63,5 @@ class employeeServiceTest {
         empdetails.setEmployee(employee);
         *///employeeDetailsRepo.updatebyemployeedepatment(20,2);
        // repo.save(employee);
-        tst.findname(1);
-    }
+      }
 }

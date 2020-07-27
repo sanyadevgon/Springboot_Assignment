@@ -5,7 +5,6 @@ import com.Springboot.EAMS.model.dto.EmployeeDTO;
 import com.Springboot.EAMS.model.entity.Employee;
 import com.Springboot.EAMS.model.entity.EmployeeDetails;
 import com.Springboot.EAMS.repo.EmployeeRepo;
-import com.Springboot.EAMS.repo.testint;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 
@@ -93,12 +91,6 @@ public class EmployeeService {
 
     }*/
 
-    @Autowired
-    testint init;
-    @PostConstruct
-    public void init(){
-        init.findname(1);
-    }
 
 
 

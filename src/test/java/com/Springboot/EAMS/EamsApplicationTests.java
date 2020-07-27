@@ -2,7 +2,6 @@ package com.Springboot.EAMS;
 
 import com.Springboot.EAMS.repo.DepartmentRepo;
 import com.Springboot.EAMS.repo.EmployeeRepo;
-import com.Springboot.EAMS.repo.testint;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,8 +16,6 @@ public class EamsApplicationTests {
 	@Autowired
 	DepartmentRepo depr;
 
-	@Autowired
-	testint testrepo;
 
 	@Test
 	void contextLoads() {

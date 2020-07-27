@@ -1,4 +1,4 @@
-package com.Springboot.EAMS;
+package com.Springboot.EAMS.configuratipn;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
