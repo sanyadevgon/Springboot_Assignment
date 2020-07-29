@@ -20,7 +20,7 @@ import java.util.Optional;
 public class EmployeeService {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
 
     @Autowired
     EmployeeRepo repo ;
@@ -54,17 +54,17 @@ public class EmployeeService {
         Employee emp = modelMapper.map(employee_dto,Employee.class);
         emp.setEmployeeDetails(empdetails);
         empdetails.setEmployee(emp);
-        //logger.info("The Request Object is : %s",employee_dto.toString());
+        LOG.info("Saving employee ID to db:"+emp.getId());
         repo.save(emp);
-         return emp;
+        return emp;
     }
 
     //retrieve
     public Employee get(long id){
         Optional<Employee> employee = repo.findById(id);
         if (!employee.isPresent())
-            throw new GlobalEamsException("NOT FOUND employee id-" + id);
-        // Initiating Logging for Get Request
+            throw new GlobalEamsException("NOT FOUND employee ID: " + id);
+        LOG.info("Retrieving employee ID: from db "+id);
         return employee.get();
     }
 
@@ -77,12 +77,23 @@ public class EmployeeService {
     }
 
     //update
-    public Employee update(EmployeeDTO employee_dto, long id){
+    public Employee update(EmployeeDTO employeeDto, long id){
         Optional<Employee> employee = repo.findById(id);
         if (!employee.isPresent())
             throw new GlobalEamsException("NOT FOUND id-" + id);
+        LOG.info("Deleting employee ID: from db "+id);
         return repo.save(modelMapper.map(employee_dto,Employee.class));
     }
+
+   /* public void updateKafka(EmployeeDTO employeeDto,long id){
+        Optional<Employee> employee = repo.findById(id);
+        if (!employee.isPresent())
+            repo.save(modelMapper.map(employeeDto,Employee.class));
+        else{
+            repo.deleteById(id);
+            repo.save(modelMapper.map(employeeDto,Employee.class));
+        }
+    }*/
 
     /*ublic void updateallsalary(long increment){
         if (increment<=0)

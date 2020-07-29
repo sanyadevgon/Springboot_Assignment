@@ -49,8 +49,4 @@ public class CustomErrorResponse {
 		this.timestamp = timestamp;
 	}
 
-
-
-
-
 }

@@ -1,5 +1,6 @@
 package com.Springboot.EAMS.controller;
 
+import com.Springboot.EAMS.exception.NullBodyException;
 import com.Springboot.EAMS.model.entity.Organisation;
 import com.Springboot.EAMS.model.dto.OrganisationDTO;
 import com.Springboot.EAMS.service.OrganisationService;
@@ -19,6 +20,8 @@ public class OrganisationController {
     @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
     public Organisation postOrganisationDetails(
             @RequestBody OrganisationDTO dto) {
+        if(dto==null)
+            throw new NullBodyException("No body provided for post method");
         return service.save(dto);
     }
 

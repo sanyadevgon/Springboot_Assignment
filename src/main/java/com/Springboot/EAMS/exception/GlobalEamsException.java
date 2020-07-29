@@ -7,6 +7,7 @@ public class GlobalEamsException extends RuntimeException{
     }
 
     public GlobalEamsException(String message) {
+
         super(message);
     }
 }

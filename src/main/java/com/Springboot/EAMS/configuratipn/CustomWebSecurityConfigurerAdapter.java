@@ -10,25 +10,34 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
- 
+
     //@Autowired
-   // private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
- 
+    // private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-          .withUser("user1")
-                .password("{noop}password")
-                .roles("USER");
+                .withUser("HR")
+                .password("{noop}HRpassword")
+                .roles("HR").and()
+                .withUser("HRManager")
+                .password("{noop}HRMpassword")
+                .roles("HRMANAGER").and()
+                .withUser("CEO")
+                .password("{noop}CEOpassword")
+                .roles("CEO");
     }
- 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests().anyRequest().authenticated()
+               .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/department/**").hasAnyRole("HRMANAGER","HR")
+                .antMatchers("/employee/**").hasRole("HR")
+                .antMatchers("/organisation/**").hasAnyRole("CEO","HRMANAGER","HR")
                 .and()
                 .httpBasic();
     }
 
-    }
+}

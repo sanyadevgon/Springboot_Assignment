@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
+//@RedisHash("Organisation")
 public class Organisation {
     @Id
     @GeneratedValue

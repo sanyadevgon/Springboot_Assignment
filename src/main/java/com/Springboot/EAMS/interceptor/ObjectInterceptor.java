@@ -15,8 +15,7 @@ public class ObjectInterceptor implements HandlerInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(ObjectInterceptor.class);
     @Override
-    public boolean preHandle(
-            HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         Enumeration<String> headerNames = request.getHeaderNames();
 
@@ -34,13 +33,15 @@ public class ObjectInterceptor implements HandlerInterceptor {
             HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
         String msg = String.format("***** The Response Object is : Out -: %s Status -: %s ",response.getOutputStream().toString(),response.getStatus());
-        logger.info(msg);
+        logger.info(msg, "Request: "+request, "Response: "+response, "Handler: "+handler);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception exception) throws Exception {
-        System.out.println("Request and Response is completed");
+
+        logger.info("Request and Response is completed");
+
     }
 
 }
