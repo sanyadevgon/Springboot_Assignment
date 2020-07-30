@@ -1,8 +1,7 @@
 package com.Springboot.EAMS.model.dto;
 
 import com.Springboot.EAMS.model.entity.Department;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,12 +14,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Component
 public class OrganisationDTO {
 
     @JsonProperty("officeId")
-    Long id;
+    private Long id;
 
     @JsonProperty("officeName")
     String name;
@@ -30,7 +28,6 @@ public class OrganisationDTO {
 
     @JsonProperty("location")
     String location;
-
 
 
     private List<Department> departments;

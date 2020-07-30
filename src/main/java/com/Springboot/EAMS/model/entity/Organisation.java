@@ -1,4 +1,5 @@
 package com.Springboot.EAMS.model.entity;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
@@ -11,22 +12,21 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "Organisation", uniqueConstraints = {@UniqueConstraint(columnNames={"office_name","location"})})
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-//@RedisHash("Organisation")
 public class Organisation {
     @Id
-    @GeneratedValue
-    @Column(name = "officeId")
+    @Column(name = "office_id")
     private long id;
 
-    @Column(name = "officeName")
+    @Column(name = "office_name")
     private String name;
 
-    @Column(name = "headId")
+    @Column(name = "head_id")
     private long headId;
 
     @Column(name = "location")
@@ -35,5 +35,7 @@ public class Organisation {
     @OneToMany(mappedBy = "reportsto_id",fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
     List<Department>departments;
+
+
 
 }

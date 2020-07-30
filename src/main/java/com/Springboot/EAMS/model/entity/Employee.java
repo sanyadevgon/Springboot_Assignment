@@ -11,7 +11,7 @@ import javax.persistence.*;
 //import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "EMPLOYEE")
+@Table(name = "EMPLOYEE", uniqueConstraints = {@UniqueConstraint(columnNames={"first_name","phone"})})
 @Setter
 @Getter
 @AllArgsConstructor
@@ -24,18 +24,17 @@ public class Employee {
     private long id;
 
     @NotNull
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private  String firstname;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastname;
 
     @NotNull
     @Column(name = "phone")
-    //@Size(max=10)
     private long phone;
 
-    @Column(name="emailId")
+    @Column(name="email_id")
     private String emailId;
 
     @Column(name="role")
@@ -45,17 +44,10 @@ public class Employee {
     private long departmentId;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
+
     @JsonManagedReference
     private EmployeeDetails employeeDetails;
 
-
-
-    //@JsonIgnore
-
-    //emailid
-    // bool isterminated
-    //reporting manager
-    //roles enum
 
 
 
@@ -66,15 +58,6 @@ public class Employee {
     @JsonIgnoreProperties
     private Department department;*/
 
-
-
-/*
-    @Temporal(TemporalType.DATE)
-    @Column(name = "dob")
-    private Date dateOfBirth;
-*/
-
-    //Date of joining auto generate
 
     @Override
     public  String toString(){

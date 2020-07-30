@@ -21,46 +21,49 @@ public class Departmentservice {
     private ModelMapper modelMapper= new ModelMapper();
 
 
-    /*private PostDto convertToDto(Post post) {
-       PostDto postDto = modelMapper.map(post, PostDto.class);
-       postDto.setSubmissionDate(post.getSubmissionDate(),
-               userService.getCurrentUser().getPreference().getTimezone());
-       return postDto;
-   }*/
+    public void savedepartment(DepartmentDTO departmentDTO){
 
-    //create
-    public Department save(DepartmentDTO dto){
-
-        return  repo.save(modelMapper.map(dto,Department.class));
+          repo.save(modelMapper.map(departmentDTO,Department.class));
     }
 
-    //retrieve
-    public Department get(long id){
+
+    public Department getdepartment(long id){
+
         Optional<Department> department = repo.findById(id);
         if (!department.isPresent())
             throw new GlobalEamsException("NOT FOUND department id-" + id);
         return department.get();
     }
 
-    //delete
-    public void delete(long id){
+
+    public void deletedepartment(long id){
         Optional<Department> department = repo.findById(id);
         if (!department.isPresent())
             throw new GlobalEamsException("NOT FOUND department id-" + id);
         repo.deleteById(id);
     }
 
-    //update
-    public Department update(DepartmentDTO dto, long id){
+
+    public void updatedepartment(DepartmentDTO departmentDTO, long id){
         Optional<Department> department = repo.findById(id);
         if (!department.isPresent())
             throw new GlobalEamsException("NOT FOUND department id-" + id);
-        return repo.save(modelMapper.map(dto,Department.class));
+        if(departmentDTO.getLocation()==null || departmentDTO.getDepartment_name()==null)
+            throw new NullPointerException("Location and Department name cannot be emoty fields");
+        Department department1 = new Department();
+        department1.setId(id);
+        department1.setDepartment_name(departmentDTO.getDepartment_name());
+        department1.setLocation(departmentDTO.getLocation());
+        department1.setEmployees(departmentDTO.getEmployees());
+        department1.setManager_id(departmentDTO.getManager_id());
+        department1.setReportsto_id(departmentDTO.getReportsto_department_id());
+        repo.save(department1);
 
     }
 
-    //getmanagerdetails
+    //etManagerDetailsofDepartment
     public List<Employee> managerDetails (long id){
+
         Optional<Department> department = repo.findById(id);
         if (!department.isPresent())
             throw new GlobalEamsException("NOT FOUND department id-" + id);

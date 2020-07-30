@@ -46,7 +46,7 @@ class employeeServiceTest {
 
 
     @Test
-    void contextLoads() {
+    void contextLoads() throws InterruptedException {
         //Optional<Employee> emp=repo.findById(2L);
         //Optional<Department> dep= depr.findById(1L);
 
@@ -63,5 +63,12 @@ class employeeServiceTest {
         empdetails.setEmployee(employee);
         *///employeeDetailsRepo.updatebyemployeedepatment(20,2);
        // repo.save(employee);
-      }
+        String start = String.valueOf(System.currentTimeMillis());
+        Thread.sleep(10000);
+        String end = String.valueOf(System.currentTimeMillis());
+        System.out.println(end+" "+start);
+
+
+
+    }
 }

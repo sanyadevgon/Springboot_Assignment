@@ -4,14 +4,16 @@ package com.Springboot.EAMS.controller;
 import com.Springboot.EAMS.exception.NullBodyException;
 import com.Springboot.EAMS.model.dto.EmployeeDTO;
 import com.Springboot.EAMS.model.entity.Employee;
-import com.Springboot.EAMS.repo.EmployeeDetailsRepo;
+import com.Springboot.EAMS.model.response.BaseMessageResponse;
+import com.Springboot.EAMS.model.response.ServiceResponse;
+import com.Springboot.EAMS.service.EmployeeDetailsService;
 import com.Springboot.EAMS.service.EmployeeService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -20,78 +22,90 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@Log4j2
 @RequestMapping(value = "/employee")
 public class EmployeeController {
 
     @Autowired
-    EmployeeService service;
+    EmployeeService employeeService;
 
     @Autowired
-    EmployeeDTO employee_dto;
+    EmployeeDetailsService employeeDetailsService;
 
     @Autowired
-    EmployeeDetailsRepo employeeDetailsRepo;
+    EmployeeDTO employeeDTO;
 
     @Autowired
     private KafkaTemplate<String, EmployeeDTO> kafkaTemplate;
 
-    private static  final String TOPIC="producer";
-
-    private final Logger LOG = LoggerFactory.getLogger(getClass());
+    private static  final String TOPIC="produce";
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Employee postEmployeeDetails(
+    public ServiceResponse<?> postEmployeeDetails(
             @RequestBody EmployeeDTO employeeDto) {
-            if(employeeDto==null)
+            if(employeeDto.getFirstname()==null)
                 throw new NullBodyException("No body provided for post method");
 
-            //employee_dto.builder().message(employee_dto.getMessage()).build();
-            LOG.info("Posting employee with ID "+employeeDto.getId());
-            return service.save(employeeDto);
+            log.info("Posting employee with ID "+employeeDto.getId());
+        employeeService.saveemployee(employeeDto);
+        return  new ServiceResponse<BaseMessageResponse>(
+                new BaseMessageResponse("Saved Successfully", HttpStatus.OK, true));
     }
 
     @Cacheable(value = "employers", key = "#id", unless = "#result.id < 4")
     @GetMapping(value = "/{id}")
-    public Employee retrieveEmployee(@PathVariable Long id) {
-        LOG.info("Getting user with ID ",id);
-        Employee employee=service.get(id);
-        employee_dto.setId(id);
-        employee_dto.setFirstname(employee.getFirstname());
-        employee_dto.setLastname(employee.getLastname());
-        kafkaTemplate.send(TOPIC,employee_dto);
-        LOG.info("Getting the details of employee with ID"+id);
-        return service.get(id);
+    public ServiceResponse<?> retrieveEmployee(@PathVariable Long id) {
+        log.info("Getting user with ID ",id);
+        Employee employee=employeeService.getemployee(id);
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setId(id);
+        employeeDTO.setFirstname(employee.getFirstname());
+        employeeDTO.setLastname(employee.getLastname());
+        employeeDTO.setPhone(employee.getPhone());
+        employeeDTO.setEmployeeDetails(employee.getEmployeeDetails());
+        kafkaTemplate.send(TOPIC,employeeDTO);
+        log.info("Getting the details of employee with ID"+id);
+        return new ServiceResponse<>(
+                employeeService.getemployee(id), HttpStatus.OK);
+        //return employeeService.get(id);
     }
 
     @CacheEvict(value = "employers", allEntries=true)
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable long id) {
-        LOG.info("Delete request for employee with ID"+ id);
-        service.delete(id);
+    public ServiceResponse<?> deleteEmployee(@PathVariable long id) {
+        log.info("Delete request for employee with ID"+ id);
+        employeeService.deleteemployee(id);
+        return  new ServiceResponse<BaseMessageResponse>(
+                new BaseMessageResponse("Deleted Successfully", HttpStatus.OK, true));
     }
 
 
     @CachePut(value = "employers", key = "#id")
     @PutMapping("/{id}")
-    public Employee updateEmployee(@RequestBody EmployeeDTO employee_dto, @PathVariable long id) {
-       LOG.info("Put request for employee with ID"+ id);
-        return service.update(employee_dto, id);
+    public ServiceResponse<?> updateEmployee(@RequestBody EmployeeDTO employeeDTO, @PathVariable long id) {
+       log.info("Put request for employee with ID"+ id);
+        employeeService.updateemployee(employeeDTO, id);
+        return  new ServiceResponse<BaseMessageResponse>(
+                new BaseMessageResponse("Saved Successfully", HttpStatus.OK, true));
     }
 
-   /*@GetMapping("/department/{id}/increment/{value}")
-    public void updateallEmployeesalary( @PathVariable long value,@PathVariable long id) {
-       employeeDetailsRepo.updatebyemployeedepatment(value,id);
-    }*/
+   @GetMapping("/department/{id}/increment/{value}")
+    public ServiceResponse<?> updateallEmployeesalarybydepartment( @PathVariable long value,@PathVariable long id) {
+       employeeDetailsService.updatesalary(value,id);
+       return  new ServiceResponse<BaseMessageResponse>(
+               new BaseMessageResponse("Salary Saved Successfully", HttpStatus.OK, true));
+    }
 
-    @KafkaListener(topics= "producer", groupId = "group_id", containerFactory = "employeeKafkaListenerFactory")
+    @KafkaListener(topics= "produce", groupId = "group_id", containerFactory = "employeeKafkaListenerFactory")
     public  void consumeJson(EmployeeDTO employeeDto) {
         //System.out.println("Consumed meassage: " + employee.getFirstname());
-        if(employeeDto==null)
-            throw new NullBodyException("No body provided for post method");
+        if(employeeDto.getFirstname()==null)
+            throw new NullBodyException("No employee details provided for post method");
 
-        //service.updateKafka(employeeDto, employeeDto.getId());
-        System.out.println("Consumed through producer"+ employeeDto.getFirstname()+employeeDto.getLastname());}
+        employeeService.updateemployeethroughKafka(employeeDto, employeeDto.getId());
+        log.info("Consumed through producer"+ employeeDto.getFirstname()+employeeDto.getLastname());
+    }
 
 
 

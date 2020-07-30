@@ -1,17 +1,12 @@
 package com.Springboot.EAMS.service;
 
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import lombok.extern.java.Log;
+import org.apache.logging.log4j.ThreadContext;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import lombok.extern.java.Log;
-import org.springframework.stereotype.Component;
-
-import lombok.extern.log4j.Log4j2;
+import java.util.*;
 
 @Component
 @Log
@@ -49,6 +44,13 @@ public class LoggingServiceImpl implements LoggingService {
         stringBuilder.append("responseBody=[").append(body).append("] ");
 
         log.info(stringBuilder.toString());
+        long start=  Long.parseLong(ThreadContext.get("start"));
+
+        long end =System.nanoTime();
+
+        log.info(" Total Time taken by Request "+ (end-start) +"nanao sec");
+        ThreadContext.clearAll();
+
     }
 
     private Map<String, String> buildParametersMap(HttpServletRequest httpServletRequest) {

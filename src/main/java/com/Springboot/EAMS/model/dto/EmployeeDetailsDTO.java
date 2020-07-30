@@ -1,6 +1,5 @@
 package com.Springboot.EAMS.model.dto;
 
-import com.Springboot.EAMS.model.entity.Department;
 import com.Springboot.EAMS.model.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Component;
@@ -25,7 +24,7 @@ public class EmployeeDetailsDTO {
     private  int age;
 
     @JsonProperty("status")
-    private Department status;
+    private String status;
 
     private Employee employee;
 

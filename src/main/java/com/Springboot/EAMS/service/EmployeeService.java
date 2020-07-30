@@ -23,11 +23,7 @@ public class EmployeeService {
     private static final Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
 
     @Autowired
-    EmployeeRepo repo ;
-
-
-    @Autowired
-    EmployeeDTO employee_dto;
+    EmployeeRepo employeeRepo ;
 
     @Bean
     public ModelMapper modelMapper(){
@@ -38,69 +34,84 @@ public class EmployeeService {
     private ModelMapper modelMapper;
 
     @Autowired
-    EmployeeDetails empdetails;
+    EmployeeDetails employeeDetails;
 
 
-    /*private PostDto convertToDto(Post post) {
-       PostDto postDto = modelMapper.map(post, PostDto.class);
-       postDto.setSubmissionDate(post.getSubmissionDate(),
-               userService.getCurrentUser().getPreference().getTimezone());
-       return postDto;
-   }*/
-
-    //create
-    public Employee save(EmployeeDTO employee_dto){
-        empdetails=employee_dto.getEmployeeDetails();
-        Employee emp = modelMapper.map(employee_dto,Employee.class);
-        emp.setEmployeeDetails(empdetails);
-        empdetails.setEmployee(emp);
-        LOG.info("Saving employee ID to db:"+emp.getId());
-        repo.save(emp);
-        return emp;
+    public void saveemployee(EmployeeDTO employeeDTO){
+        employeeDetails=employeeDTO.getEmployeeDetails();
+        Employee employee = modelMapper.map(employeeDTO,Employee.class);
+        employee.setEmployeeDetails(employeeDetails);
+        employeeDetails.setEmployee(employee);
+        LOG.info("Saving employee ID to db:"+employee.getId());
+        employeeRepo.save(employee);
     }
 
-    //retrieve
-    public Employee get(long id){
-        Optional<Employee> employee = repo.findById(id);
+
+    public Employee getemployee(long id){
+        Optional<Employee> employee = employeeRepo.findById(id);
         if (!employee.isPresent())
             throw new GlobalEamsException("NOT FOUND employee ID: " + id);
         LOG.info("Retrieving employee ID: from db "+id);
         return employee.get();
     }
 
-    //delete
-    public void delete(long id){
-        Optional<Employee> employee = repo.findById(id);
+
+    public void deleteemployee(long id){
+        Optional<Employee> employee = employeeRepo.findById(id);
         if (!employee.isPresent())
             throw new GlobalEamsException("NOT FOUND employee id-" + id +" Delete not possible");
-        repo.deleteById(id);
+        employeeRepo.deleteById(id);
     }
 
-    //update
-    public Employee update(EmployeeDTO employeeDto, long id){
-        Optional<Employee> employee = repo.findById(id);
+
+    public void updateemployee(EmployeeDTO employeeDto, long id){
+        Optional<Employee> employee = employeeRepo.findById(id);
         if (!employee.isPresent())
             throw new GlobalEamsException("NOT FOUND id-" + id);
+        if(employeeDto.getFirstname()==null || employeeDto.getPhone()==0)
+            throw new NullPointerException("Firstname and Employee name cannot be empty fields");
+        Employee employee1= new Employee();
+        employee1.setId(employeeDto.getId());
+        employee1.setFirstname(employeeDto.getFirstname());
+        employee1.setLastname(employeeDto.getLastname());
+        employee1.setDepartmentId(employeeDto.getDepartmentId());
+        employee1.setPhone(employeeDto.getPhone());
+        employee1.setEmailId(employee1.getEmailId());
+        employee1.setRole(employee1.getRole());
+        employee1.setEmployeeDetails(employee1.getEmployeeDetails());
         LOG.info("Deleting employee ID: from db "+id);
-        return repo.save(modelMapper.map(employee_dto,Employee.class));
+        employeeDetails=employeeDto.getEmployeeDetails();
+        employeeDetails.setEmployee(employee1);
+        employeeRepo.save(employee1);
     }
 
-   /* public void updateKafka(EmployeeDTO employeeDto,long id){
-        Optional<Employee> employee = repo.findById(id);
-        if (!employee.isPresent())
-            repo.save(modelMapper.map(employeeDto,Employee.class));
-        else{
-            repo.deleteById(id);
-            repo.save(modelMapper.map(employeeDto,Employee.class));
+    public void updateemployeethroughKafka(EmployeeDTO employeeDto,long id){
+        Optional<Employee> employee = employeeRepo.findById(id);
+        if (!employee.isPresent()) {
+            Employee employee1=new Employee();
+            employee1.setFirstname(employeeDto.getFirstname());
+            employee1.setLastname(employeeDto.getLastname());
+            employee1.setPhone(employeeDto.getPhone());
+            employee1.setDepartmentId(employeeDto.getDepartmentId());
+            employee1.setEmployeeDetails(employeeDto.getEmployeeDetails());
+            employeeDetails=employeeDto.getEmployeeDetails();
+            employeeDetails.setEmployee(employee1);
+            employeeRepo.save(employee1);
         }
-    }*/
+        else{
+            employeeRepo.deleteById(id);
+            Employee employee1=new Employee();
+            employee1.setFirstname(employeeDto.getFirstname());
+            employee1.setLastname(employeeDto.getLastname());
+            employee1.setPhone(employeeDto.getPhone());
+            employee1.setDepartmentId(employeeDto.getDepartmentId());
+            employee1.setEmployeeDetails(employeeDto.getEmployeeDetails());
+            employeeDetails=employeeDto.getEmployeeDetails();
+            employeeDetails.setEmployee(employee1);
+            employeeRepo.save(employee1);
+        }
+    }
 
-    /*ublic void updateallsalary(long increment){
-        if (increment<=0)
-                return ;
-        repo.updatesalary(increment);
-
-    }*/
 
 
 

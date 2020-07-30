@@ -31,16 +31,16 @@ public class EmployeeDetails {
     @Column(name = "gender")
     private char gender;
 
+    @NotNull
     @Column(name = "salary")
     private long salary;
 
-    @NotNull
     @Column(name="age")
     private  int age;
 
     //whether employ is currently in service 1 if employed, 0 if terminated
-    @Column(name="status")
-    private boolean status;
+    @Column(name="active")
+    private String active;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="employee_id", unique=true)

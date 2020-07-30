@@ -2,6 +2,7 @@ package com.Springboot.EAMS.service;
 
 
 import com.Springboot.EAMS.exception.GlobalEamsException;
+import com.Springboot.EAMS.exception.NullBodyException;
 import com.Springboot.EAMS.model.dto.OrganisationDTO;
 import com.Springboot.EAMS.model.entity.Organisation;
 import com.Springboot.EAMS.repo.OrganisationRepo;
@@ -18,9 +19,6 @@ public class OrganisationService {
     OrganisationRepo repo ;
 
 
-    @Autowired
-    OrganisationDTO dto;
-
     private ModelMapper modelMapper= new ModelMapper();
 
 
@@ -32,8 +30,11 @@ public class OrganisationService {
    }*/
 
     //create
-    public Organisation save(OrganisationDTO dto){
-        return  repo.save(modelMapper.map(dto,Organisation.class));
+    public void save(OrganisationDTO organisationDTO){
+        if(organisationDTO.getName()==null || organisationDTO.getLocation()==null)
+            throw new NullBodyException("Name and location cannot be empty fields");
+         repo.save(modelMapper.map(organisationDTO,Organisation.class));
+
     }
 
     //retrieve
@@ -44,6 +45,7 @@ public class OrganisationService {
 
         return organisation.get();
     }
+
     //delete
     public void delete(long id){
         Optional<Organisation> organisation = repo.findById(id);
@@ -53,11 +55,12 @@ public class OrganisationService {
     }
 
     //update
-    public Organisation update(OrganisationDTO dto, long id){
+    public Organisation update(OrganisationDTO organisationDTO, long id){
         Optional<Organisation> organisation = repo.findById(id);
         if (!organisation.isPresent())
             throw new GlobalEamsException("NOT FOUND id organisation-" + id);
-        return repo.save(modelMapper.map(dto,Organisation.class));
+        repo.deleteById(id);
+        return repo.save(modelMapper.map(organisationDTO,Organisation.class));
 
     }
 
