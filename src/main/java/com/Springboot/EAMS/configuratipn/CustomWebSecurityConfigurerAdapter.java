@@ -35,9 +35,10 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
                 .authorizeRequests()
                 .antMatchers("/department/**").hasAnyRole("HRMANAGER","HR")
                 .antMatchers("/employee/**").hasRole("HR")
-                .antMatchers("/organisation/**").hasAnyRole("CEO","HRMANAGER","HR")
+                .antMatchers("/organisation/**").hasRole("CEO")
                 .and()
                 .httpBasic();
+
     }
 
 }

@@ -48,7 +48,7 @@ public class LoggingServiceImpl implements LoggingService {
 
         long end =System.nanoTime();
 
-        log.info(" Total Time taken by Request "+ (end-start) +"nanao sec");
+        log.info(" Total Time taken by Request "+ (end-start) +"nano sec");
         ThreadContext.clearAll();
 
     }

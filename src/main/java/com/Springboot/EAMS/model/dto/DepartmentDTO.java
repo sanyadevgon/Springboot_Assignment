@@ -20,19 +20,19 @@ import java.util.List;
 public class DepartmentDTO {
 
     @JsonProperty("id")
-    Long department_id;
+    private Long department_id;
 
     @JsonProperty("name")
-    String department_name;
+    private String department_name;
 
     @JsonProperty("to_id")
-    Long reportsto_department_id;
+    private Long reportsto_department_id;
 
     @JsonProperty("manager_id")
-    Long manager_id;
+    private Long manager_id;
 
     @JsonProperty("location")
-    String location;
+    private String location;
 
     private List<Employee> employees;
 

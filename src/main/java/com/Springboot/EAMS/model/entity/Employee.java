@@ -2,10 +2,7 @@ package com.Springboot.EAMS.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.internal.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 //import javax.validation.constraints.Size;
@@ -23,7 +20,7 @@ public class Employee {
     @Column
     private long id;
 
-    @NotNull
+    @NonNull
     @Column(name = "first_name")
     private  String firstname;
 

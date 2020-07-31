@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -14,20 +13,20 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
 public class OrganisationDTO {
 
     @JsonProperty("officeId")
     private Long id;
 
     @JsonProperty("officeName")
-    String name;
+    private String name;
+
 
     @JsonProperty("headId")
-    Long manager_id;
+    private Long headid;
 
     @JsonProperty("location")
-    String location;
+    private String location;
 
 
     private List<Department> departments;

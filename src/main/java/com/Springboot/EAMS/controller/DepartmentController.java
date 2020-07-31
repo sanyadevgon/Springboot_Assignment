@@ -1,7 +1,6 @@
 package com.Springboot.EAMS.controller;
 
 import com.Springboot.EAMS.dto.DepartmentDTO;
-import com.Springboot.EAMS.exception.NullBodyException;
 import com.Springboot.EAMS.model.response.BaseMessageResponse;
 import com.Springboot.EAMS.model.response.ServiceResponse;
 import com.Springboot.EAMS.service.Departmentservice;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController()
 @RequestMapping(value="/department", consumes = MediaType.APPLICATION_JSON_VALUE)
 public class DepartmentController {
+
     @Autowired
     Departmentservice departmentservice;
 
@@ -27,8 +27,6 @@ public class DepartmentController {
     public ServiceResponse<?> postDepartmentDetails(@RequestBody DepartmentDTO departmentDTO) {
         log.info(
                 "DepartmentController : saveDepartmentDetails : Received Request to save department"+ departmentDTO.toString());
-        if(departmentDTO==null)
-            throw new NullBodyException("No body provided for post method");
         departmentservice.savedepartment(departmentDTO);
          return  new ServiceResponse<BaseMessageResponse>(
                  new BaseMessageResponse("Saved Successfully", HttpStatus.OK, true));

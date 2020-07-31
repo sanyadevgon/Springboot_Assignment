@@ -13,8 +13,9 @@ public class EmployeeDetailsService {
     @Autowired
     EmployeeDetailsRepo employeeDetailsRepo;
 
+
     public void updatesalary(long inc,long dept){
-        if(Objects.isNull(inc))
+        if(inc ==0 || Objects.isNull(inc))
             throw new NullBodyException("invalid data for increment ");
 
         employeeDetailsRepo.updatebyemployeedepatment(inc,dept);

@@ -48,8 +48,6 @@ public class Department implements Serializable{
         this.reportsto_id=reportingto_department_id;
         this.manager_id=manager_id;
         this.location=location;
-
-
     }
 
 }

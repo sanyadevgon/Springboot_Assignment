@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -27,6 +26,7 @@ public class EmployeeDTO {
 
     @JsonProperty("lastname")
     private String lastname;
+
 
     @JsonProperty("phone")
     private long phone;
